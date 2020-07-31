@@ -35,6 +35,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/addUser', async (req, res) => {
+    console.log(req.body);
     let task = { 
         time:req.body.time,
         text:req.body.text
