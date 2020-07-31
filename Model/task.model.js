@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const task = mongoose.Schema({
     time:{
-        type:Date
+        type:Date,
+        default:Date.now
     },
     text:{
         type:String

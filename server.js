@@ -24,28 +24,27 @@ const connection = mongoose.connection;
 connection.once('open', () => {
     console.log('[sucsess] DB Connected.');
 })
-/*.then(() => {
-    console.log('[sucsess] DB Connected.');
-}).catch(error => {
-    console.log("[error] can't connect to DB : " + error);
-})
-*/
+
 app.get('/', (req, res) => {
     res.send("<h1>hello</h1>");
 });
 
-app.post('/addUser', async (req, res) => {
-    console.log(req.body);
-    let task = { 
-        time:req.body.time,
+app.post('/addTask', async (req, res) => {
+    const newTask = new Task({
         text:req.body.text
-    };
-    let newTask = new Task(task);
-    await newTask.save();
-    res.json(req.body);
-    //res.json(newTask);
+    });
+    const saveTask = await newTask.save();
+    res.json(saveTask);
 })
 
+app.get('/getTask', async (req, res) => {
+    try {
+        const task = await Task.find();
+        res.json(task);
+    } catch (error) {
+        res.json({ message:error });
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server running at PORT: ${PORT}`);
