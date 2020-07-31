@@ -5,6 +5,9 @@ const task = mongoose.Schema({
         type:Date,
         default:Date.now
     },
+    title:{
+        type:String
+    },
     text:{
         type:String
     }
