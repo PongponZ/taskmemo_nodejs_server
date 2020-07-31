@@ -42,8 +42,8 @@ app.post('/addUser', async (req, res) => {
     };
     let newTask = new Task(task);
     await newTask.save();
-
-    res.json(newTask);
+    res.json(req.body);
+    //res.json(newTask);
 })
 
 
